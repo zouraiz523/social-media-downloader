@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Downloader | Download videos from Instagram, TikTok, and YouTube</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📥</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <i class="fas fa-download"></i> Social Media Downloader
+                </h1>
+                <p class="app-subtitle">Download videos from Instagram, TikTok, and YouTube</p>
+            </div>
+            
+            <!-- Dark mode toggle -->
+            <div class="theme-toggle">
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Card -->
+        <main class="main-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Download Social Media Videos</h2>
+                    <p class="card-description">Paste your video URL below and select the platform to download</p>
+                </div>
+                
+                <div class="card-body">
+                    <!-- Platform Selection -->
+                    <div class="platform-selection">
+                        <h3 class="platform-title">Select Platform:</h3>
+                        <div class="platform-options">
+                            <button class="platform-option active" data-platform="instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </button>
+                            <button class="platform-option" data-platform="tiktok">
+                                <i class="fab fa-tiktok"></i>
+                                <span>TikTok</span>
+                            </button>
+                            <button class="platform-option" data-platform="youtube">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTube</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- URL Input -->
+                    <div class="url-input-section">
+                        <label for="urlInput" class="input-label">Video URL</label>
+                        <div class="input-group">
+                            <input type="text" 
+                                   id="urlInput" 
+                                   class="url-input" 
+                                   placeholder="Paste Instagram, TikTok, or YouTube link here"
+                                   autocomplete="off">
+                            <button class="clear-input" id="clearInput" aria-label="Clear input">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="input-hint" id="platformHint">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Currently selected: Instagram. Paste any Instagram video URL.</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Download Button -->
+                    <div class="action-section">
+                        <button id="downloadBtn" class="download-btn">
+                            <i class="fas fa-download"></i>
+                            <span>Download Video</span>
+                        </button>
+                        
+                        <!-- Loading Spinner (hidden by default) -->
+                        <div class="loading-spinner hidden" id="loadingSpinner">
+                            <div class="spinner"></div>
+                            <span>Processing download...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Status/Message Area -->
+                    <div class="status-section">
+                        <div class="status-message hidden" id="statusMessage">
+                            <!-- Messages will be inserted here by JavaScript -->
+                        </div>
+                        
+                        <!-- Download Info (shown after successful fetch) -->
+                        <div class="download-info hidden" id="downloadInfo">
+                            <div class="download-info-header">
+                                <h3><i class="fas fa-file-video"></i> Video Details</h3>
+                            </div>
+                            <div class="download-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">Title:</span>
+                                    <span class="detail-value" id="videoTitle">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Duration:</span>
+                                    <span class="detail-value" id="videoDuration">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Quality:</span>
+                                    <span class="detail-value" id="videoQuality">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Size:</span>
+                                    <span class="detail-value" id="videoSize">-</span>
+                                </div>
+                            </div>
+                            <div class="download-actions" id="downloadActions">
+                                <!-- Download links will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <p><i class="fas fa-shield-alt"></i> Your privacy is protected. We don't store any downloaded content.</p>
+                </div>
+            </div>
+            
+            <!-- Instructions Section -->
+            <div class="instructions">
+                <h3><i class="fas fa-question-circle"></i> How to use:</h3>
+                <ol class="instructions-list">
+                    <li>Copy the URL of the video you want to download from Instagram, TikTok, or YouTube</li>
+                    <li>Select the correct platform (auto-detected if possible)</li>
+                    <li>Paste the URL into the input field above</li>
+                    <li>Click the "Download Video" button</li>
+                    <li>Choose your preferred quality and download the video</li>
+                </ol>
+                
+                <div class="platform-tips">
+                    <div class="tip">
+                        <h4><i class="fab fa-instagram"></i> Instagram</h4>
+                        <p>Works with posts, reels, and IGTV videos</p>
+                    </div>
+                    <div class="tip">
+                        <h4><i class="fab fa-tiktok"></i> TikTok</h4>
+                        <p>Supports regular TikTok videos (no watermarks)</p>
+                    </div>
+                    <div class="tip">
+                        <h4><i class="fab fa-youtube"></i> YouTube</h4>
+                        <p>Works with most YouTube videos (except age-restricted)</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with <i class="fas fa-heart"></i> using Python Flask Backend</p>
+            <p class="footer-note">This tool is for personal use only. Please respect content creators' rights.</p>
+            <p class="footer-copyright">© 2026 Social Media Downloader | v1.0.0</p>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
