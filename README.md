@@ -1,1 +1,1 @@
-social-media-downloader!
+social-media-downloader
